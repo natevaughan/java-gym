@@ -6,14 +6,10 @@ import java.util.stream.IntStream;
 
 public class Staircase {
 	public static List<String> create(Integer size) {
-		return IntStream.rangeClosed(1, size).mapToObj(i -> {
-			return IntStream.rangeClosed(1, size).mapToObj(j -> {
-				if (j < size - i + 1) {
-					return " ";
-				} else {
-					return "#";
-				}
-			}).collect(Collectors.joining());
-		}).collect(Collectors.toList());
+		return IntStream.rangeClosed(1, size)
+				.mapToObj(i -> IntStream.rangeClosed(1, size)
+						.mapToObj(j -> (j < size - i + 1) ? " " : "#")
+						.collect(Collectors.joining()))
+				.collect(Collectors.toList());
 	}
 }
