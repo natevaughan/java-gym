@@ -1,5 +1,7 @@
 package com.natevaughan.javagym;
 
+import java.util.Arrays;
+
 public class StringReverser {
 	public static String reverse(String foo) {
 		var sb = new StringBuilder();
@@ -9,5 +11,9 @@ public class StringReverser {
 		}
 
 		return sb.toString();
+	}
+
+	public static String[] reverseAll(String[] strings) {
+		return Arrays.stream(strings).map(StringReverser::reverse).toArray(String[]::new);
 	}
 }
