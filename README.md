@@ -7,9 +7,11 @@ Remembering how to write Java
  - Remember on List interface:
    - .size() instead of .length
    - .get(0) instead of [0]
+ - Testing
+   - How to test array or list equality
+   - Assert throws, expect exception in Junit 5
  - Null checks everywhere--this is Java after all!
    - Are there any annotations for this in 2024
- - Assert throws, expect exception in Junit 5
  - Mockito - remember how
  - New Java 21 collections - SequencedMap
  - Remember to write package declarations
