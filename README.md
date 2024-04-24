@@ -7,6 +7,10 @@ Remembering how to write Java
  - Remember on List interface:
    - .size() instead of .length
    - .get(0) instead of [0]
+ - Stream ops
+   - .first()? or findFirst()?
+   - .filter()?
+   - .filterIndexed()?
  - Testing
    - How to test array or list equality
    - Assert throws, expect exception in Junit 5
