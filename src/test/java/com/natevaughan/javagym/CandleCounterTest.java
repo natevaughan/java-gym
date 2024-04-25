@@ -34,4 +34,11 @@ public class CandleCounterTest {
 		var result = CandleCounter.count(candles);
 		assertEquals(5, result);
 	}
+
+	@Test
+	public void count0() {
+		List<Integer> candles = List.of();
+		var result = CandleCounter.count(candles);
+		assertEquals(0, result);
+	}
 }

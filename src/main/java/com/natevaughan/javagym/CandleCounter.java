@@ -9,10 +9,13 @@ public class CandleCounter {
 	}
 
 	private static Integer countUsingIteration(List<Integer> candles) {
-		Integer max = null;
-		var count = 0;
+		if (candles.size() == 0) {
+			return 0;
+		}
+		int count = 0;
+		var max = candles.get(0);
 		for (var i : candles) {
-			if (max == null || i > max) {
+			if (i > max) {
 				max = i;
 				count = 1;
 			} else if (i == max) {
