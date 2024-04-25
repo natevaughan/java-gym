@@ -12,7 +12,7 @@ public class TimeConverterTest {
 
 	@Test
 	public void convertOneDigitHourAM() {
-		assertEquals("07:05:45", TimeConverter.militaryFromAMPM("07:05:45PM"));
+		assertEquals("07:05:45", TimeConverter.militaryFromAMPM("07:05:45AM"));
 	}
 
 	@Test
