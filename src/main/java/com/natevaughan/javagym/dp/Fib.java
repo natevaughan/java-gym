@@ -1,8 +1,8 @@
-package com.natevaughan.javagym;
+package com.natevaughan.javagym.dp;
 
 import java.util.HashMap;
 
-public class DPFib {
+public class Fib {
 	public static int calculate(int n) {
 		var memo = new HashMap<Integer, Integer>();
 		memo.put(0, 0);
