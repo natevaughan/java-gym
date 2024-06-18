@@ -6,6 +6,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Time complexity O(n)
+ * Space complexity O(n)
+ */
 public class NonAdjacentSumTest {
 	@Test
 	public void nonAdjacentSum1() {
