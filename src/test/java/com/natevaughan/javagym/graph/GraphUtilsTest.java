@@ -22,7 +22,7 @@ public class GraphUtilsTest {
 		List<String> result = GraphUtils.traverseDepthFirst(hello);
 		assertEquals("hello world I am Nate", String.join(" ", result));
 	}
-	
+
 	@Test
 	public void testDepthFirstAdjacencyMapTraversal() {
 		Map<String, List<String>> adjacency = Map.of(
@@ -34,5 +34,18 @@ public class GraphUtilsTest {
 		);
 		List<String> result = GraphUtils.traverseDepthFirst(adjacency, "hello");
 		assertEquals("hello world I am Nate", String.join(" ", result));
+	}
+
+	@Test
+	public void testBreadthFirstAdjacencyMapTraversal() {
+		Map<String, List<String>> adjacency = Map.of(
+				"hello", List.of("Nate", "world"),
+				"world", List.of("I"),
+				"I", List.of(),
+				"am", List.of(),
+				"Nate", List.of("am")
+		);
+		List<String> result = GraphUtils.traverseBreadthFirst(adjacency, "hello");
+		assertEquals("hello Nate world am I", String.join(" ", result));
 	}
 }

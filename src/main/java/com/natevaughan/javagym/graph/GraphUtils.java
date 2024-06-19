@@ -28,5 +28,19 @@ public class GraphUtils {
 		}
 		return traversed;
 	}
+
+	public static <T> List<T> traverseBreadthFirst(Map<T, List<T>> adjacency, T entry) {
+		Queue<T> queue = new ArrayDeque<>();
+		queue.add(entry);
+		List<T> result = new ArrayList<>();
+		while (!queue.isEmpty()) {
+			T el = queue.remove();
+			result.add(el);
+			for (T neighbor : adjacency.get(el)) {
+				queue.add(neighbor);
+			}
+		}
+		return result;
+	}
 }
 
