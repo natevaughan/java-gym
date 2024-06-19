@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class RotateRightTest {
 	private static final RotateRight.ListNode NODE_1 = new RotateRight.ListNode(1);
@@ -29,5 +30,6 @@ public class RotateRightTest {
 		assertEquals(1, result.next.next.val);
 		assertEquals(2, result.next.next.next.val);
 		assertEquals(3, result.next.next.next.next.val);
+		assertNull(result.next.next.next.next.next);
 	}
 }
