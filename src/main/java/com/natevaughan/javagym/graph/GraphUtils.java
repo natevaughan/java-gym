@@ -1,7 +1,6 @@
 package com.natevaughan.javagym.graph;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class GraphUtils {
 	public static <T> List<T> traverseDepthFirst(GraphNode<T> node) {
@@ -15,4 +14,19 @@ public class GraphUtils {
 		}
 		return results;
 	}
+
+	public static <T> List<T> traverseDepthFirst(Map<T, List<T>> adjacencyMap, T entry) {
+		Deque<T> stack = new ArrayDeque<>();
+		List<T> traversed = new ArrayList<>();
+		stack.add(entry);
+		while (!stack.isEmpty()) {
+			T current = stack.pop();
+			traversed.add(current);
+			for (T neighbor : adjacencyMap.get(current)) {
+				stack.push(neighbor);
+			}
+		}
+		return traversed;
+	}
 }
+
