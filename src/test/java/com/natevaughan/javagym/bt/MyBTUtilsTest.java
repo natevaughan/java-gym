@@ -27,8 +27,19 @@ public class MyBTUtilsTest {
 	}
 
 	@Test
-	public void testTraverse() {
-		var result = MyBTUtils.traverse(NODE_A);
+	public void testTraverseDepthFirst1() {
+		var result = MyBTUtils.traverseDepthFirst(NODE_A);
 		assertEquals("A", result.getFirst());
+		assertEquals("B", result.get(1));
+		assertEquals("D", result.get(2));
+		assertEquals("E", result.get(3));
+		assertEquals("C", result.get(4));
+		assertEquals("F", result.get(5));
+	}
+
+	@Test
+	public void findMinValue() {
+		var result = MyBTUtils.min(NODE_A);
+		assertEquals("A", result);
 	}
 }
