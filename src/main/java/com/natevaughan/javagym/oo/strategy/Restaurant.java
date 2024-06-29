@@ -1,8 +1,11 @@
 package com.natevaughan.javagym.oo.strategy;
 
+import java.text.DecimalFormat;
 import java.util.*;
 
 public class Restaurant {
+
+	private static DecimalFormat df = new DecimalFormat("#.##");
 	public static class MItem {
 		String id;
 		String name;
@@ -18,9 +21,17 @@ public class Restaurant {
 		String id;
 		Integer cap;
 		Integer seated = 0;
+		Map<String, Integer> orders = new HashMap<>();
 		public RTable(String id, Integer cap) {
 			this.id = id;
 			this.cap = cap;
+		}
+	}
+
+	public static class RTableCapComparator implements Comparator<RTable> {
+		@Override
+		public int compare(RTable a, RTable b) {
+			return b.cap.compareTo(a.cap);
 		}
 	}
 
@@ -53,11 +64,38 @@ public class Restaurant {
 	}
 
 	private String checkout(String tableId) {
-		return null;
+		if (!tables.containsKey(tableId)) {
+			return "nonexistant";
+		}
+		RTable t = tables.get(tableId);
+		Double total = 0.0;
+		for (String itemId : t.orders.keySet()) {
+			Integer count = t.orders.get(itemId);
+			Double cost = items.get(itemId).price;
+			total += count * cost;
+		}
+		Double factor = 1.08;
+		if (t.cap >= 5) {
+			factor = 1.23;
+		}
+		total = total * factor;
+		return "$" + df.format(total);
 	}
 
 	private String orderItem(String itemId, String tableId) {
-		return null;
+		if (!items.containsKey(itemId)) {
+			return "nonexistant";
+		}
+		if (!tables.containsKey(tableId)) {
+			return "nonexistant";
+		}
+		var t = tables.get(tableId);
+		if (t.orders.containsKey(itemId)) {
+			t.orders.put(itemId, t.orders.get(itemId) + 1);
+		} else {
+			t.orders.put(itemId, 1);
+		}
+		return "ordered";
 	}
 
 	private String seatParty(Integer size, String tableId) {
@@ -68,6 +106,18 @@ public class Restaurant {
 			}
 			matched = tables.get(tableId);
 		}
+		if (matched == null) {
+			List<RTable> sorted = new ArrayList<>(tables.values());
+			sorted.sort(new RTableCapComparator());
+			for (RTable t : sorted) {
+				if (t.cap >= size && t.seated == 0) {
+					matched = t;
+				}
+			}
+		}
+		if (matched == null) {
+			return "";
+		}
 		if (matched.seated > 0) {
 			return "occupied";
 		}
@@ -75,7 +125,7 @@ public class Restaurant {
 			return "insufficient";
 		}
 		matched.seated = size;
-		return null;
+		return matched.id;
 	}
 
 	private String createTable(String tableId, Integer cap) {

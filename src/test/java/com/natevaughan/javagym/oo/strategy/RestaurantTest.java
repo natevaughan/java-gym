@@ -100,6 +100,15 @@ public class RestaurantTest {
 		assertEquals("$61.83", r.process("CHECKOUT table01"));
 	}
 
+
+	@Test
+	public void restaurantTest6_1() {
+		Restaurant r = new Restaurant();
+		assertEquals("created", r.process("CREATE_ITEM app01 SpinDip 9.55"));
+		assertEquals("created", r.process("CREATE_TABLE table01 4"));
+		assertEquals("ordered", r.process("ORDER_ITEM app01 table01"));
+		assertEquals("nonexistant", r.process("CHECKOUT table02"));
+	}
 	@Test
 	public void restaurantTest7() {
 		Restaurant r = new Restaurant();
@@ -108,7 +117,7 @@ public class RestaurantTest {
 		assertEquals("created", r.process("CREATE_ITEM entr01 Salmon 22.95"));
 		assertEquals("created", r.process("CREATE_ITEM entr02 Burger 15.90"));
 		assertEquals("created", r.process("CREATE_TABLE table02 6"));
-		assertEquals("table01", r.process("SEAT_PARTY 6"));
+		assertEquals("table02", r.process("SEAT_PARTY 6"));
 		assertEquals("ordered", r.process("ORDER_ITEM app01 table02"));
 		assertEquals("ordered", r.process("ORDER_ITEM app02 table02"));
 		assertEquals("ordered", r.process("ORDER_ITEM entr02 table02"));
