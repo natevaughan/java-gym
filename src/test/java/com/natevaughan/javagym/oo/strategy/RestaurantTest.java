@@ -26,11 +26,9 @@ public class RestaurantTest {
 	 * CHECKOUT <table_id>
 	 *     -> Return the total amount owed to settle the bill, with 8% tax
 	 *     -> Include 15% gratuity (on pre-tax total) if there are more than 5 in the party
-	 * CAPACITY
-	 *     -> "70.0%" return the percent, out of 100, with 1 decimal place, of seats filled in the restaurant
 	 */
 	@Test
-	public void restaurantTest1() {
+	public void restaurant_phase1_test1() {
 		Restaurant r = new Restaurant();
 		assertEquals("created", r.process("CREATE_ITEM app01 SpinDip 9.50"));
 		assertEquals("duplicate", r.process("CREATE_ITEM app01 Fries 6.50"));
@@ -38,14 +36,14 @@ public class RestaurantTest {
 	}
 
 	@Test
-	public void restaurantTest2() {
+	public void restaurant_phase1_test2() {
 		Restaurant r = new Restaurant();
 		assertEquals("created", r.process("CREATE_TABLE table01 6"));
 		assertEquals("duplicate", r.process("CREATE_TABLE table01 4"));
 	}
 
 	@Test
-	public void restaurantTest3() {
+	public void restaurant_phase1_test3() {
 		Restaurant r = new Restaurant();
 		assertEquals("created", r.process("CREATE_TABLE table01 4"));
 		assertEquals("created", r.process("CREATE_TABLE table02 6"));
@@ -59,35 +57,35 @@ public class RestaurantTest {
 	}
 
 	@Test
-	public void restaurantTest3_2() {
+	public void restaurant_phase1_test4() {
 		Restaurant r = new Restaurant();
 		assertEquals("created", r.process("CREATE_TABLE table01 4"));
 		assertEquals("nonexistant", r.process("SEAT_PARTY 5 table02"));
 	}
 
 	@Test
-	public void restaurantTest3_3() {
+	public void restaurant_phase1_test5() {
 		Restaurant r = new Restaurant();
 		assertEquals("created", r.process("CREATE_TABLE table01 4"));
 		assertEquals("insufficient", r.process("SEAT_PARTY 5 table01"));
 	}
 
 	@Test
-	public void restaurantTest4() {
+	public void restaurant_phase1_test6() {
 		Restaurant r = new Restaurant();
 		assertEquals("created", r.process("CREATE_ITEM app01 SpinDip 9.55"));
 		assertEquals("nonexistant", r.process("ORDER_ITEM app01 table01"));
 	}
 
 	@Test
-	public void restaurantTest5() {
+	public void restaurant_phase1_test7() {
 		Restaurant r = new Restaurant();
 		assertEquals("created", r.process("CREATE_TABLE table01 4"));
 		assertEquals("nonexistant", r.process("ORDER_ITEM app01 table01"));
 	}
 
 	@Test
-	public void restaurantTest6() {
+	public void restaurant_phase1_test8() {
 		Restaurant r = new Restaurant();
 		assertEquals("created", r.process("CREATE_ITEM app01 SpinDip 9.55"));
 		assertEquals("created", r.process("CREATE_ITEM entr02 Burger 15.90"));
@@ -102,7 +100,7 @@ public class RestaurantTest {
 
 
 	@Test
-	public void restaurantTest6_1() {
+	public void restaurant_phase1_test9() {
 		Restaurant r = new Restaurant();
 		assertEquals("created", r.process("CREATE_ITEM app01 SpinDip 9.55"));
 		assertEquals("created", r.process("CREATE_TABLE table01 4"));
@@ -110,7 +108,7 @@ public class RestaurantTest {
 		assertEquals("nonexistant", r.process("CHECKOUT table02"));
 	}
 	@Test
-	public void restaurantTest7() {
+	public void restaurant_phase1_test10() {
 		Restaurant r = new Restaurant();
 		assertEquals("created", r.process("CREATE_ITEM app01 SpinDip 9.55"));
 		assertEquals("created", r.process("CREATE_ITEM app02 Fries 6.90"));
@@ -132,9 +130,11 @@ public class RestaurantTest {
 	/**
 	 * Now create a new command that gets the sales totals for each item and
 	 * ranks them by most sales volume (dollars) to least:
-	 * SALES_REPORT
-	 *  - should output <item_id> <sales_amount_dollars> <sales_count>
-	 *  - in the case of equal sales dollars amounts, it should order by higher volume
+	 * SALES_REPORT <item_id>
+	 *  -> should output <item_name> <sales_amount_dollars> <sales_count>
+	 *  -> in the case of equal sales dollars amounts, it should order by higher volume
+	 * CAPACITY
+	 * 	-> "70.0%" return the percent, out of 100, with 1 decimal place, of seats filled in the restaurant
 	 */
 	@Test
 	public void happyHourTest1() {
